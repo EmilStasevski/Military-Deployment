@@ -75,7 +75,7 @@ T-33, 1-3 E-3A AWACS. 1 SAR det (MAC) with
 2,USA,United States ,640,TUR,Turkey,1985,1.0,5000.0,0,"Turkey: 1,200.
 Turkey: 3,800; HQ, 1 tac, 2 air base gps.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 2,USA,United States ,651,EGY,Egypt,1985,1.0,3600.0,0,"Middle East: Egypt: 1,200. Sinai (MFO) 1,100 Egypt 1,300;",MFO,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0
-2,USA,United States ,670,SAU,Saudi Arabia,1985,1.0,300.0,0,"Saudi Arabia 390 (USAF: 4
+2,USA,United States ,670,SAU,Saudi Arabia,1985,1.0,390.0,0,"Saudi Arabia 390 (USAF: 4
 E-3A, 3 KC-135, 1 KC-10, spt staff).",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 2,USA,United States ,732,ROK,South Korea,1985,1.0,40950.0,0,"South Korea: 29,750. 1 army HQ; 1 inf div
 (13,900).
@@ -3486,7 +3486,7 @@ OSCE • Ukraine 73",OSCE,,,,,,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0
 2,USA,United States ,211,BEL,Belgium,2017,1.0,900.0,0,US European Command • 900,,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 2,USA,United States ,230,SPN,Spain,2017,1.0,3200.0,0,"US European Command • 3,200; 1 air base at Moron; 1  naval base at Rota",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 2,USA,United States ,235,POR,Portugal,2017,1.0,200.0,0,US European Command • 200; 1 spt facility at Lajes,,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-2,USA,United States ,255,GMY,Germany,2017,1.0,374500.0,0,"US Africa Command • 1 HQ at Stuttgart US European Command • 37,450; 1 Combined Service HQ  (EUCOM) at Stuttgart–Vaihingen US Army 23,000 FORCES BY ROLE 1 HQ (US Army Europe (USAREUR)) at Heidelberg;  1 div HQ (fwd); 1 SF gp; 1 armd recce bn; 2 armd bn;  1 mech bde(-); 1 arty bn; 1 (cbt avn) hel bde(-); 1 (cbt                                                       avn) hel bde HQ; 1 int bde; 1 MP bde; 1 sigs bde; 1 spt  bde; 1 (APS) armd bde eqpt set EQUIPMENT BY TYPE M1 Abrams; M2/M3 Bradley; Stryker, M109; M777; AH-     64D/E Apache; CH-47F Chinook; UH-60L/M Black Hawk;  HH-60M Black Hawk US Navy 1,000 USAF 12,300 FORCES BY ROLE 1 HQ (US Air Force Europe (USAFE)) at Ramstein  AB; 1 HQ (3rd Air Force) at Ramstein AB; 1 ftr wg at  Spangdahlem AB with 1 ftr sqn with 24 F-16C/D Fighting  Falcon; 1 tpt wg at Ramstein AB with 14 C-130J-30  Hercules; 2 Gulfstream V (C-37A); 5 Learjet 35A (C-21A);  1 B-737-700 (C-40B) USMC 1,150",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,USA,United States ,255,GMY,Germany,2017,1.0,37450.0,0,"US Africa Command • 1 HQ at Stuttgart US European Command • 37,450; 1 Combined Service HQ  (EUCOM) at Stuttgart–Vaihingen US Army 23,000 FORCES BY ROLE 1 HQ (US Army Europe (USAREUR)) at Heidelberg;  1 div HQ (fwd); 1 SF gp; 1 armd recce bn; 2 armd bn;  1 mech bde(-); 1 arty bn; 1 (cbt avn) hel bde(-); 1 (cbt                                                       avn) hel bde HQ; 1 int bde; 1 MP bde; 1 sigs bde; 1 spt  bde; 1 (APS) armd bde eqpt set EQUIPMENT BY TYPE M1 Abrams; M2/M3 Bradley; Stryker, M109; M777; AH-     64D/E Apache; CH-47F Chinook; UH-60L/M Black Hawk;  HH-60M Black Hawk US Navy 1,000 USAF 12,300 FORCES BY ROLE 1 HQ (US Air Force Europe (USAFE)) at Ramstein  AB; 1 HQ (3rd Air Force) at Ramstein AB; 1 ftr wg at  Spangdahlem AB with 1 ftr sqn with 24 F-16C/D Fighting  Falcon; 1 tpt wg at Ramstein AB with 14 C-130J-30  Hercules; 2 Gulfstream V (C-37A); 5 Learjet 35A (C-21A);  1 B-737-700 (C-40B) USMC 1,150",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 2,USA,United States ,290,POL,Poland,2017,1.0,850.0,0,"NATO • Enhanced Forward Presence 850; 1 mech bn US European Command • 2,100; 1 armd bde HQ; 1 armd  cav sqn(-); 1 SP arty bn; M1 Abrams; M3 Bradley; M109; 1  atk hel flt with 4 AH-64E Apache; 1 tpt hel flt with 4 UH-60  Black Hawk",Enhanced Forward Presence,,,,,,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
 2,USA,United States ,310,HUN,Hungary,2017,1.0,100.0,0,US European Command • 100; 1 armd recce tp; M3 Bradley,,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 2,USA,United States ,325,ITA,Italy,2017,1.0,12050.0,0,"US European Command • 12,050 US Army 4.400; 1 AB IBCT(-) US Navy 3,600; 1 HQ (US Navy Europe (USNAVEUR)) at  Naples; 1 HQ (6th Fleet) at Gaeta; 1 MP sqn with 4 P-8A  Poseidon at Sigonella USAF 3,850; 1 ftr wg with 2 ftr sqn with 21 F-16C/D  Fighting Falcon at Aviano  USMC 200",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -21855,7 +21855,7 @@ UN • UNMIS 2 obs",UNMIS,,,,,,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
 640,TUR,Turkey,352,CYP,Cyprus,1985,1.0,17000.0,0,"1 corps of 2 inf divs (17,000); 150
 M-47/-48 MBT; M-113 APC; 212 105mm,
 155mm, 203mm guns/how; 40mm AA guns.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-640,TUR,Turkey,352,CYP,Cyprus,1987,1.0,230000.0,0,"Cyprus: 1 corps of 2 inf divs
+640,TUR,Turkey,352,CYP,Cyprus,1987,1.0,23000.0,0,"Cyprus: 1 corps of 2 inf divs
 (23,000); 150 M-47/-48 MBT; 100 M-59 APC,
 108 107mm mor; 150 105mm, 155mm,
 203mm gun/how; 72 40mm AAguns.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -21926,7 +21926,7 @@ Obs.",UNOMIG,,,,,,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
 ",UNPREDEP,,,,,,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
 640,TUR,Turkey,344,CRO,Croatia,1997,1.0,36.0,0,(SFOR): 34. (UNPF): 2.,SFOR,UNPF,,,,,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0
 640,TUR,Turkey,346,BOS,Bosnia and Herzegovina,1997,1.0,1515.0,0,"(SFOR): 1,488; 1 inf bn gp; (UNMIBH): 27 civ pol",SFOR,UNMIBH,,,,,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0
-640,TUR,Turkey,352,CYP,Cyprus,1997,1.0,275000.0,0,"25-30,000; 1 corps; 265 M-48A5 MBT; 200 M-N 113, 50 AAPC APC; 90 105mm, 36 155mm, 8 203mm
+640,TUR,Turkey,352,CYP,Cyprus,1997,1.0,27500.0,0,"25-30,000; 1 corps; 265 M-48A5 MBT; 200 M-N 113, 50 AAPC APC; 90 105mm, 36 155mm, 8 203mm
 towed; 30 155mm SP; 30 120mm, 102 107mm, 175
 81mm mor; 84 40mm AA guns; ac 5 hel 3-4",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 640,TUR,Turkey,372,GRG,Georgia,1997,1.0,5.0,0,(UNOMIG): 5 Obs,UNOMIG,,,,,,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
@@ -22250,7 +22250,7 @@ gendarmerie unit",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 mot inf bn(-)",Resolute Support,,,,,,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0
 640,TUR,Turkey,345,YUG,Serbia,2019,1.0,244.0,0,NATO • KFOR 244; 1 inf coy UN • UNMIK 1,KFOR,UNMIK,,,,,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0
 640,TUR,Turkey,346,BOS,Bosnia and Herzegovina,2019,1.0,249.0,0,EU • EUFOR • Operation Althea  249; 1 inf coy,EUFOR,Althea,,,,,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0
-640,TUR,Turkey,352,CYP,Cyprus,2019,1.0,3800.0,0,"(NORTHERN) e33,800; 1 army corps HQ; 1 SF  regt; 1 armd bde; 2 mech inf div; 1 mech inf regt; 1 arty  regt; 1 avn comd; 287 M48A5T2; 147 ACV AIFV; 106  ACV AAPC (incl variants); 386 M113 (incl variants); 36   M101A1; 36 M114A2; 12 M115; 30 M44T; 144 M52T1; 9  T-122; 171 81mm mor; 70 M30; 135 HY-12; Milan; 60 ACV  TOW; 219 M40A1; FIM-92 Stinger; 44 Rh 202; 78 GAI-D01;  16 GDF-003; 3 Cessna 185 (U-17); 2 AS532UL Cougar; 1  Bell 205 (UH-1H Iroquois); 1 PB",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+640,TUR,Turkey,352,CYP,Cyprus,2019,1.0,33800.0,0,"(NORTHERN) e33,800; 1 army corps HQ; 1 SF  regt; 1 armd bde; 2 mech inf div; 1 mech inf regt; 1 arty  regt; 1 avn comd; 287 M48A5T2; 147 ACV AIFV; 106  ACV AAPC (incl variants); 386 M113 (incl variants); 36   M101A1; 36 M114A2; 12 M115; 30 M44T; 144 M52T1; 9  T-122; 171 81mm mor; 70 M30; 135 HY-12; Milan; 60 ACV  TOW; 219 M40A1; FIM-92 Stinger; 44 Rh 202; 78 GAI-D01;  16 GDF-003; 3 Cessna 185 (U-17); 2 AS532UL Cougar; 1  Bell 205 (UH-1H Iroquois); 1 PB",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 640,TUR,Turkey,520,SOM,Somalia,2019,1.0,200.0,0,200 (trg team); UN • UNSOM 1,,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 640,TUR,Turkey,645,IRQ,Iraq,2019,1.0,1000.0,0,"Army 1,000; 1 cdo unit; NATO • NATO Mission  Iraq up to 30",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 640,TUR,Turkey,652,SYR,Syria,2019,1.0,1000.0,0,"e1,000; some cdo units; 2 armd BG; 1 SAM unit; 1  gendarmerie unit",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -25266,7 +25266,7 @@ withdrawal continues.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 816,DRV,Vietnam,811,CAM,Cambodia,1990,1.0,3000.0,0,"CAMBODIA: E3,000 advisers.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 816,DRV,Vietnam,812,LAO,Laos,1990,1.0,12500.0,0,"LAOS: 10-15,000: mostly economic construction tps.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 816,DRV,Vietnam,811,CAM,Cambodia,1991,1.0,3000.0,0,"CAMBODIA: e3,000 advisers.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-816,DRV,Vietnam,812,LAO,Laos,1991,1.0,5000.0,0,"LAOS: 5,000: mostly economic construction tps.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+816,DRV,Vietnam,812,LAO,Laos,1991,1.0,12500.0,0,"LAOS: 10-15,000: mostly economic construction tps.",,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 816,DRV,Vietnam,626,SSD,South Sudan,2014,1.0,2.0,2,UN • UNMISS 2 obs,UNMIS,,,,,,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
 816,DRV,Vietnam,482,CEN,Central African Republic,2015,1.0,3.0,0,UN • MINUSCA 3,MINUSCA,,,,,,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
 816,DRV,Vietnam,626,SSD,South Sudan,2015,1.0,2.0,2,UN • UNMISS 2 obs,UNMIS,,,,,,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
