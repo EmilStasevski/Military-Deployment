@@ -1,0 +1,494 @@
+---
+title: 'Military Deployment visualizations for Article'
+author: "Emil Staševski"
+output: 
+  html_document:
+    theme: paper
+    code_folding: hide
+---
+
+```{r setup, include=FALSE,message=FALSE,warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Loading libraries
+
+
+```{r, message=FALSE,warning=FALSE}
+library(tidyverse)
+library(tidyr)
+library(readxl)
+library(stargazer)
+library(dplyr)
+library(knitr)
+
+colors3 <- c("#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", "#911eb4", "#46f0f0", "#f032e6", "#bcf60c",
+             "#fabebe", "#008080" ,"#e6beff" ,"#9a6324" ,"#fffac8", "#800000", "#aaffc3", "#808000", "#ffd8b1",
+              "#000075" ,"gold"  ,  "#ffffff", "#000000")
+```
+
+
+
+### Loading & joining data
+
+```{r, message=FALSE,warning=FALSE}
+
+balance = read.csv(url("https://raw.githubusercontent.com/EmilStasevski/Military-Deployment/main/IMDT.csv"))
+
+
+balance$year_ccode1 = paste(balance$year, balance$ccode1, sep='_')
+
+corwar = read.csv(url("https://raw.githubusercontent.com/EmilStasevski/Military-Deployment/main/Correlates_of_war.csv"))
+corwar$year_ccode1=paste(corwar$year, corwar$ccode1, sep='_')
+
+
+corwar %>% select(military_personnel, year_ccode1)->corwar
+balance %>% left_join(corwar)->balance
+
+```
+
+
+#### Creating features
+
+```{r, message=FALSE,warning=FALSE}
+balance$period <- case_when(
+  balance$year<1993 ~ '1985-1992',
+  balance$year>1992 & balance$year< 2001~ '1993-2000',
+  balance$year>2000 & balance$year <2014~'2001-2013',
+  balance$year>2013 ~ '2014-2022'
+)
+
+balance$troops =as.numeric(balance$Troops)
+
+balance$percent=balance$troops / balance$military_personnel
+```
+
+
+
+
+
+### Figure 1
+
+*The military deployment ratio to total military personnel in 1985-2022*
+
+
+```{r, message=FALSE,warning=FALSE}
+pathImages= '~/military deployment/images/'
+
+
+balance %>% 
+  group_by(year) %>% summarise(percent = mean(percent, na.rm=T)) %>% 
+  ggplot(aes(year,percent ))+
+  geom_line(size=1,linetype = "dashed",color='blue')+
+  labs(title = 'Percent of military personnel in 1985-2022',y='Percent',x='Year')+
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10))+
+  theme_bw()+
+   theme(axis.title.x = element_text(size=8, face='bold'),axis.title.y = element_text(size=8, face='bold'), title =element_text(size=10, face='bold') )+
+  theme(axis.text.x = element_text( size=6))+
+  theme(axis.text.y = element_text( size=6))
+
+
+ggsave('~/Articles/images/Figure1.jpg', dpi=800)
+ggsave('~/Articles/images/Figure1.eps', dpi=800)
+```
+
+
+### Figure 2 
+
+*Confidence interval for mean values of deployed military personnel down by periods*
+
+
+```{r, message=FALSE,warning=FALSE}
+
+
+df <- balance %>% group_by(period) %>% summarise(m = mean(troops, na.rm=T),
+                                       stdv = sd(troops, na.rm=T))
+df$period <- as.factor(factor(df$period, levels=c("1985-1992",     
+ "1993-2000","2001-2013" ,"2014-2022" )) )
+
+
+ggplot(df, aes(period,m,fill=period)) + 
+  geom_bar(stat="identity", color="black", 
+           position=position_dodge()) +
+  geom_errorbar(aes(ymin=m-stdv, ymax=m+stdv), width=.2,
+                position=position_dodge(.9)) +
+  labs(title = 'Confidence interval for means',y='Percent',x='Period')+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10))+
+  theme_bw()+
+   theme(axis.title.x = element_text(size=8, face='bold'),axis.title.y = element_text(size=8, face='bold'), title =element_text(size=10, face='bold') )+
+  theme(axis.text.x = element_text( size=6))+
+  theme(axis.text.y = element_text( size=6))
+
+
+ggsave('~/Articles/images/Figure2.jpg', dpi=800)
+ggsave('~/Articles/images/Figure2.eps', dpi=800)
+```
+
+
+
+### Figure 3
+
+*Top 10 biggest deployers by quantity of deployed troops and top 10 most frequent deployers in 1985-2022*
+
+
+```{r, message=FALSE,warning=FALSE,fig.width=10,fig.height=4}
+balance %>% 
+  group_by(deployer) %>% summarise(troops=mean(troops, na.rm=T)) %>%  arrange(-troops) %>%  head(10) %>% select(deployer) %>% left_join(balance, by='deployer') %>% 
+  group_by(deployer, year) %>% summarise(troops=mean(troops, na.rm=T)) %>% 
+  ggplot(aes(year, troops, fill=deployer))+
+  geom_bar(stat='identity')+
+  labs(y='Troops',x='Year')+
+  scale_fill_manual(values= colors3)+
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10))+
+  theme_bw()+
+   theme(axis.title.x = element_text(size=8, face='bold'),axis.title.y = element_text(size=8, face='bold'), plot.title =element_text(size=14, face='bold') )+
+  theme(axis.text.x = element_text( size=6))+
+  theme(axis.text.y = element_text( size=6))->p1
+
+ 
+
+
+balance %>% 
+  group_by(deployer) %>% summarise(n=n()) %>%  arrange(-n) %>%  head(10) %>% select(deployer) %>% left_join(balance, by='deployer') %>% 
+  group_by(deployer, year) %>% summarise(n=n()) %>% 
+  ggplot(aes(year,n, fill=deployer))+
+  geom_bar(stat='identity')+
+  labs(y='Number of dyads',x='Year')+
+  scale_fill_manual(values= colors3)+
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10))+
+  theme_bw()+
+   theme(axis.title.x = element_text(size=8, face='bold'),axis.title.y = element_text(size=8, face='bold'), title =element_text(size=10, face='bold') )+
+  theme(axis.text.x = element_text( size=6))+
+  theme(axis.text.y = element_text( size=6))->p2
+
+
+library(ggpubr)
+figure <- ggarrange(p1,p2)
+annotate_figure(figure, top = text_grob("Top deployers", 
+               face = "bold", size = 14))
+
+
+
+
+ggsave('~/Articles/images/Figure3.jpg', dpi=800, width=20, heigh=8)
+ggsave('~/Articles/images/Figure3.eps', dpi=800, width=20, heigh=8)
+
+```
+
+
+
+### Figure 4
+
+
+*Military deployment down by mission types in four periods*
+
+
+```{r, message=FALSE,warning=FALSE}
+balance %>% 
+  select(ccode1,ccode2,troops,deployer,period,host
+        
+         ,c(UN:Air))->operations
+
+operations %>% 
+  pivot_longer(cols=c('Peacekeeping':'Air'),
+                names_to='Type',
+               values_to = 'freq')->longed_type
+```
+
+
+
+```{r, message=FALSE,warning=FALSE}
+
+group.colors <- c(Peacekeeping = "#4363d8",  Other="gray", 
+       no_mandate='#303030',           
+  CounterInsurgency ='red',   
+  Training='orange',
+  Air='cyan3',
+  Maritime='navyblue',
+  no_type='gray'
+  
+ )
+
+longed_type$Type = ifelse(longed_type$freq<1 , 'no_type', longed_type$Type)
+
+longed_type %>% 
+  group_by(period, Type) %>% summarise(troops=mean(troops,na.rm=T)) %>% 
+  arrange(desc(period)) ->groupped
+
+groupped$Type=ifelse(is.na(groupped$Type), 'no_type', groupped$Type)
+
+p1 <- groupped %>% filter(period=='1985-1992')%>% 
+  ggplot(aes(x='',y=troops, fill=Type))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_manual(values=group.colors)+
+  labs(x='', y='', title='1985-1992')+
+  theme_bw()+
+  theme(axis.text = element_blank(),
+        axis.title.x =element_blank(),
+        axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+        axis.ticks = element_blank()
+       )
+
+
+
+p2 <- groupped %>% filter(period=='1993-2000')%>% 
+  ggplot(aes(x='',y=troops, fill=Type))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_manual(values=group.colors)+
+  labs(x='', y='', title='1993-2000')+
+  theme_bw()+
+  theme(axis.text = element_blank(),
+        axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+        axis.ticks = element_blank()
+        )
+
+p3  <- groupped %>% filter(period=='2001-2013')%>% 
+  ggplot(aes(x='',y=troops, fill=Type))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_manual(values=group.colors)+
+  labs(x='', y='', title='2001-2013')+
+  theme_bw()+
+  theme(axis.text = element_blank(),
+        axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+        axis.ticks = element_blank())
+
+
+p4  <- groupped %>% filter(period=='2014-2022')%>% 
+  ggplot(aes(x='',y=troops, fill=Type))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_manual(values=group.colors)+
+  labs(x='', y='', title='2014-2022')+
+  theme_bw()+
+  theme(axis.text = element_blank(),
+        axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+        axis.ticks = element_blank())
+
+
+ol1 <- ggarrange(p1,p2, p3, p4,
+                    ncol = 2, nrow = 2)
+
+
+ol1
+
+
+ggsave("~/Articles/images/Figure4.jpg", units = "cm",dpi=600)
+ggsave("~/Articles/images/Figure4.eps", units = "cm",dpi=600)
+
+```
+
+
+
+
+
+
+### Figure 5 
+
+*Military deployment down by the mandate of organizations and states in four periods*
+
+
+```{r, message=FALSE,warning=FALSE}
+operations %>% 
+  pivot_longer(cols=c('UN':'Other'),
+                names_to='Mandate',
+               values_to = 'freq')->longed_org
+```
+
+
+```{r, message=FALSE,warning=FALSE}
+
+group.colors <- c(UN = "#4363d8",  Other="gray", 
+       no_mandate='#303030',           
+  US ='red',         
+  EU ='#ffe119'  ,       
+  NATO ="#004586"  ,     
+  SADC ="#bfef45" ,      
+  AU    ="#3cb44b" ,     
+  ECOWAS ="#9A6324"     ,
+  OSCE  ="#f032e6"      ,
+ ECCAS ="#aaffc3"     , 
+ ECOMOG="#800000")
+
+longed_org$Mandate = ifelse(longed_org$freq<1 , 'no_mandate', longed_org$Mandate)
+
+longed_org %>% 
+  group_by(period,  Mandate) %>% summarise(troops=mean(troops,na.rm=T)) %>% 
+  arrange(desc(period)) ->groupped
+
+groupped$Mandate=ifelse(is.na(groupped$Mandate), 'no_mandate', groupped$Mandate)
+
+p1 <- groupped %>% filter(period=='1985-1992')%>% 
+  ggplot(aes(x='',y=troops, fill=Mandate))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_manual(values=group.colors)+
+  labs(x='', y='', title='1985-1992')+
+  theme_bw()+
+  theme(axis.text = element_blank(),
+        axis.title.x =element_blank(),
+        axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+        axis.ticks = element_blank()
+       )
+
+
+
+p2 <- groupped %>% filter(period=='1993-2000')%>% 
+  ggplot(aes(x='',y=troops, fill=Mandate))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_manual(values=group.colors)+
+  labs(x='', y='', title='1993-2000')+
+  theme_bw()+
+  theme(axis.text = element_blank(),
+        axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+        axis.ticks = element_blank()
+        )
+
+p3  <- groupped %>% filter(period=='2001-2013')%>% 
+  ggplot(aes(x='',y=troops, fill=Mandate))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_manual(values=group.colors)+
+  labs(x='', y='', title='2001-2013')+
+  theme_bw()+
+  theme(axis.text = element_blank(),
+        axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+        axis.ticks = element_blank())
+
+
+p4  <- groupped %>% filter(period=='2014-2022')%>% 
+  ggplot(aes(x='',y=troops, fill=Mandate))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_manual(values=group.colors)+
+  labs(x='', y='', title='2014-2022')+
+  theme_bw()+
+  theme(axis.text = element_blank(),
+        axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+        axis.ticks = element_blank())
+
+ol2 <- ggarrange(p1,p2, p3, p4,
+                    ncol = 2, nrow = 2)
+
+
+ol2
+
+
+ggsave("~/Articles/images/Figure5.jpg",dpi=800)
+ggsave("~/Articles/images/Figure5.eps",dpi=800)
+
+```
+
+
+
+
+
+
+
+
+### Figure 6
+
+*Figure 7. The military deployment network’s graph metrics in 1985-2022*
+
+ - Density -  the ratio between the number of edges present in the graph and the maximum possible number of edges that the graph can have.
+ 
+ - Transitivity - 
+ 
+ - Reciprocity -
+ 
+ - Modularity - 
+
+
+
+```{r, message=FALSE,warning=FALSE}
+library(ggraph)
+library(tidygraph)
+library(igraph)
+years <- c(1985:2022)
+
+
+density_vector <- c()
+
+for(x in years){
+  balance %>% filter(year==x) %>% 
+    dplyr::select(cowc1,cowc2,troops) %>% na.omit() %>% 
+    graph_from_data_frame() %>% graph.density()->new_value
+  density_vector <- c(density_vector,new_value)
+  
+}
+
+
+transitivity_vector <- c()
+
+for(i in years){
+  balance %>% filter(year==i) %>% 
+    dplyr::select(cowc1,cowc2,troops) %>% na.omit() %>% 
+    graph_from_data_frame() %>% transitivity()->new_value
+  transitivity_vector <- c(transitivity_vector,new_value)
+  
+}
+
+reciprocity_vector <- c()
+
+for(i in years){
+  balance %>% filter(year==i) %>% 
+    dplyr::select(cowc1,cowc2,troops) %>% na.omit() %>% 
+    graph_from_data_frame() %>% reciprocity()->new_value
+  reciprocity_vector <- c(reciprocity_vector,new_value)
+  
+}
+
+modularity_vector <- c()
+
+for(i in years){
+  balance %>% filter(year==i) %>% 
+    dplyr::select(cowc1,cowc2,troops) %>% na.omit() %>% 
+    graph_from_data_frame() %>% as.undirected() %>% cluster_louvain() %>% modularity()->new_value
+  modularity_vector <- c(modularity_vector,new_value)
+  
+}
+
+mod_table <- data.frame(years,density_vector,reciprocity_vector,modularity_vector,
+                        transitivity_vector)
+
+mod_table %>% 
+  pivot_longer(
+    cols =c('density_vector':'transitivity_vector'),
+    names_to = 'graph metric',
+    values_to = 'value'
+  )->graph_metric_long
+
+
+graph_metric_long %>% 
+  ggplot(aes(years, value, color=`graph metric`))+
+  geom_line()+
+  labs(y='Graph metrics',x='Year', title='Dynamics of graph metrics')+
+  scale_fill_manual(values= colors3)+
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10))+
+  theme_bw()+
+   theme(axis.title.x = element_text(size=8, face='bold'),axis.title.y = element_text(size=8, face='bold'), title =element_text(size=10, face='bold') )+
+  theme(axis.text.x = element_text( size=6))+
+  theme(axis.text.y = element_text( size=6))
+  
+
+ggsave('~/Articles/images/Figure6.jpg', dpi=800)
+ggsave('~/Articles/images/Figure6.eps', dpi=800)
+
+```
+
